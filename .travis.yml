@@ -1,0 +1,14 @@
+sudo: required
+
+services:
+  - docker
+
+addons:
+  apt:
+    packages:
+      - vagrant
+
+script:
+  - docker build -t abigail/debian-vagrant-puppet .
+  - cd test && vagrant up --provider=docker
+  - vagrant ssh -c "uname -a"
